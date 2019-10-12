@@ -2,7 +2,7 @@ class TicTacToe {
     constructor() {
         //symbol of player 1
         this.mySymbol = "x";
-        
+
         //symbol of opponent
         this.opponentSymbol = "o";
 
@@ -61,31 +61,31 @@ class TicTacToe {
 
     isFinished() {
         //if we haven't turns and have winner, game is finished
-        return  (this.noMoreTurns() || this.getWinner())? true : false;
+        return (this.noMoreTurns() || this.getWinner()) ? true : false;
     }
 
     getWinner() {
         //check all combinations
-         for (var i = 0; i < this.winCombinations.length; i++) {
+        for (var i = 0; i < this.winCombinations.length; i++) {
 
             //for quick access get combinations
-             var placeFromTestOfWin = this.winCombinations[i];
+            var placeFromTestOfWin = this.winCombinations[i];
 
-             //get winning places
-             var place1 = placeFromTestOfWin[0];
-             var place2 = placeFromTestOfWin[1];
-             var place3 = placeFromTestOfWin[2];
+            //get winning places
+            var place1 = placeFromTestOfWin[0];
+            var place2 = placeFromTestOfWin[1];
+            var place3 = placeFromTestOfWin[2];
 
-             //check places to win
-             if (
-                this.field[place1[0]][place1[1]] == this.field[place2[0]][place2[1]] && 
+            //check places to win
+            if (
+                this.field[place1[0]][place1[1]] == this.field[place2[0]][place2[1]] &&
                 this.field[place1[0]][place1[1]] == this.field[place3[0]][place3[1]] &&
                 this.field[place1[0]][place1[1]] !== null
-                ) {
-                 return this.field[place1[0]][place1[1]]
-             }
-         }
-         return null
+            ) {
+                return this.field[place1[0]][place1[1]]
+            }
+        }
+        return null
     }
 
     noMoreTurns() {
@@ -99,6 +99,20 @@ class TicTacToe {
     }
 
     isDraw() {
+        //if we hav winner we haven't draw
+        if (this.getWinner() !== null) {
+            return false
+        }
+        //check all place in field and if it has empty place -> false
+        for (var i = 0; i < 3; i++) {
+            for (var x = 0; x < 3; x++) {
+                if (this.field[i][x] == null) {
+                    return false
+                }
+            }
+        }
+
+        return true
     }
 
     getFieldValue(x, y) {
